@@ -1,4 +1,7 @@
-from windownFunctions import *
+from windowsFunctions import *
+from compile import *
 
-print(AllocatePage())
-print(GetLastError())
+a = getBytecodeOfFile("./compile.py")
+
+for b in a:
+    print(b)
