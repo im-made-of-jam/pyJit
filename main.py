@@ -1,5 +1,5 @@
 from windowsFunctions import *
-from compile import *
+from compileToMachineCode import *
 
 a = getBytecodeOfFile("./compile.py")
 
