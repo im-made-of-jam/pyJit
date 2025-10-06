@@ -5,9 +5,11 @@ MEM_COMMIT      = 0x00001000
 MEM_RESERVE     = 0x00002000
 MEM_RELEASE     = 0x00008000
 
-PAGE_READONLY   = 0x02
-PAGE_READWRITE  = 0x04
-PAGE_EXECUTE    = 0x10
+PAGE_READONLY          = 0x02
+PAGE_READWRITE         = 0x04
+PAGE_EXECUTE           = 0x10
+PAGE_EXECUTE_READ      = 0x20
+PAGE_EXECUTE_READWRITE = 0x40
 
 kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
 
@@ -18,6 +20,10 @@ VirtualAlloc.argtypes = [wintypes.LPVOID, ctypes.c_size_t, wintypes.DWORD, winty
 VirtualFree          = kernel32.VirtualFree
 VirtualFree.restype  = wintypes.BOOL
 VirtualFree.argtypes = [wintypes.LPVOID, ctypes.c_size_t, wintypes.DWORD]
+
+VirtualProtect          = kernel32.VirtualProtect
+VirtualProtect.restype  = wintypes.BOOL
+VirtualProtect.argtypes = [wintypes.LPVOID, ctypes.c_size_t, wintypes.DWORD, wintypes.PDWORD]
 
 GetLastError          = kernel32.GetLastError
 GetLastError.restype  = wintypes.DWORD
@@ -68,6 +74,7 @@ class AllocatedPageInformation:
         self.inUse = []
 
 AllAllocatedPageStarts = []
+AllAllocatedPageFields = []
 AllocatedPageMetadata  = []
 
 # get a memory page from windows
@@ -77,6 +84,7 @@ def AllocatePage() -> ctypes.c_void_p:
     if pageStart != None:
         AllocatedPageMetadata.append(AllocatedPageInformation(pageStart, pageSize))
         AllAllocatedPageStarts.append(pageStart)
+        AllAllocatedPageFields.append(ctypes.c_uint8.from_address(pageStart))
 
     return pageStart
 
@@ -93,6 +101,7 @@ def DeallocatePage(pageStart) -> bool:
         return False
 
     if VirtualFree(AllAllocatedPageStarts[i], 0, MEM_RELEASE):
+        del AllAllocatedPageFields[index]
         del AllAllocatedPageStarts[index]
         del AllocatedPageMetadata[index]
 
