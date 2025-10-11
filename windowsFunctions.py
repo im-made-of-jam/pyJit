@@ -83,8 +83,8 @@ def AllocatePage() -> ctypes.c_void_p:
 
     if pageStart != None:
         AllocatedPageMetadata.append(AllocatedPageInformation(pageStart, pageSize))
-        AllAllocatedPageStarts.append(pageStart)
-        AllAllocatedPageFields.append(ctypes.c_uint8.from_address(pageStart))
+        AllAllocatedPageStarts.append(ctypes.c_void_p(pageStart))
+        AllAllocatedPageFields.append((ctypes.c_uint8 * 4096).from_address(pageStart))
 
     return pageStart
 

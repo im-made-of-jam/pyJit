@@ -20,6 +20,9 @@ class CompiledFunction:
 		if (not resultType in CompiledFunction.getCtypesTypes()) and (resultType is not None):
 			raise NotImplementedError("Using non ctypes result types is not supported (yet)")
 
+		if type(address) is ctypes.c_void_p:
+			address = address.value
+
 		self.funcType   = ctypes.CFUNCTYPE(resultType, *argTypes)
 		self.resultType = resultType
 		self.callable   = self.funcType(address)
