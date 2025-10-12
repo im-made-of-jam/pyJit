@@ -1,18 +1,19 @@
 from windowsFunctions import *
 from compileToMachineCode import *
 from compiledFunction import CompiledFunction
+import time
 
-a = getBytecodeOfFile("./compileToMachineCode.py")
+start = time.perf_counter_ns()
+for i in range(1000):
+	a = getBytecodeOfFile("./compileToMachineCode.py")
+end = time.perf_counter_ns()
 
-pageStart = AllocatePage()
-print((AllAllocatedPageFields[0]))
-for i in range(4096):
-	AllAllocatedPageFields[0][i] = 0xC3
+print("with cache", end-start)
 
-b = CompiledFunction(AllAllocatedPageStarts[0])
 
-print(hex(b.pageStart))
+start = time.perf_counter_ns()
+for i in range(1000):
+	a = getBytecodeOfFile("./compileToMachineCode.py", True)
+end = time.perf_counter_ns()
 
-b()
-
-print("something")
+print("no cache  ", end-start)
