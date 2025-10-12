@@ -2,16 +2,30 @@
 
 import dis
 
+# cache compiled files so we dont have to compile them again and again and again
+_compiledFiles = {}
+
 # gets the CPython bytecode of a given python file
-def getBytecodeOfFile(pathToFile: str):
+# if noCache is True then the file will be compiled again and the cached entry replaced
+def getBytecodeOfFile(pathToFile: str, noCache=False):
+    # check cache and use it if its there
+    if (pathToFile in _compiledFiles.keys()) and (not noCache):
+        return dis.get_instructions(_compiledFiles[pathToFile])
+
+    # this is why the cache is used because this will be very *very* slow
     fileDump = ""
     with open(pathToFile, "r") as mainFile:
         for line in mainFile.readlines():
             fileDump += line
 
-    a = compile(fileDump, pathToFile, "exec")
+    # cant imagine this will be particularly fast either
+    codeObject = compile(fileDump, pathToFile, "exec")
 
-    b = dis.get_instructions(a, show_caches=True)
+    # now the slow stuff is out of the way we can cache the compiled object
+    _compiledFiles[pathToFile] = codeObject
+
+    # got everything in terms of the code object so now we can get the instructions and were done
+    b = dis.get_instructions(codeObject, show_caches=True)
     return [c for c in b]
 
 # turns one Python instrcution into x86-64 machine code
