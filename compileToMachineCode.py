@@ -332,241 +332,268 @@ def getMachineCodeOfInstruction(instruction: dis.Instruction) -> list[int]:
         case "SET_UPDATE":
             #TODO this
             return []
-        
+
         # 1 argument
         case "DICT_UPDATE":
             #TODO this
             return []
-        
+
         # 1 argument
         case "DICT_MERGE":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_ATTR":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_SUPER_ATTR":
             #TODO this
             return []
-        
+
         # 1 argument
         case "COMPARE_OP":
             #TODO this
             return []
-        
+
         # 1 argument
         case "IS_OP":
             #TODO this
             return []
-        
+
         # 1 argument
         case "CONTAINS_OP":
             #TODO this
             return []
-        
+
         # 1 argument
         case "IMPORT_NAME":
             #TODO this
             return []
-        
+
         # 1 argument
         case "IMPORT_FROM":
             #TODO this
             return []
-        
+
         # 1 argument
         case "JUMP_FORWARD":
             #TODO this
             return []
-        
+
         # 1 argument
         case "JUMP_BACKWARD":
             #TODO this
             return []
-        
+
         # 1 argument
         case "JUMP_BACKWARD_NO_INTERRUPT":
             #TODO this
             return []
-        
+
         # 1 argument
         case "POP_JUMP_IF_TRUE":
             #TODO this
             return []
-        
+
         # 1 argument
         case "POP_JUMP_IF_FALSE":
             #TODO this
             return []
-        
+
         # 1 argument
         case "POP_JUMP_IF_NOT_NONE":
             #TODO this
             return []
-        
+
         # 1 argument
         case "POP_JUMP_IF_NONE":
             #TODO this
             return []
-        
+
         # 1 argument
         case "FOR_ITER":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_GLOBAL":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_FAST":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_FAST_BORROW":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_FAST_LOAD_FAST":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_FAST_BORROW_LOAD_FAST_BORROW":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_FAST_CHECK":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_FAST_AND_CLEAR":
             #TODO this
             return []
-        
+
         # 1 argument
         case "STORE_FAST":
             #TODO this
             return []
-        
+
         # 1 argument
         case "STORE_FAST_STORE_FAST":
             #TODO this
             return []
-        
+
         # 1 argument
         case "STORE_FAST_LOAD_FAST":
             #TODO this
             return []
-        
+
         # 1 argument
         case "DELETE_FAST":
             #TODO this
             return []
-        
+
         # 1 argument
         case "MAKE_CELL":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_DEREF":
             #TODO this
             return []
-        
+
         # 1 argument
         case "LOAD_FROM_DICT_OR_DEREF":
             #TODO this
             return []
-        
+
         # 1 argument
         case "STORE_DEREF":
             #TODO this
             return []
-        
+
         # 1 argument
         case "DELETE_DEREF":
             #TODO this
             return []
-        
+
         # 1 argument
         case "COPY_FREE_VARS":
             #TODO this
             return []
-        
+
         # 1 argument
         case "RAISE_VARARGS":
             #TODO this
             return []
-        
+
         # 1 argument
         case "CALL":
             #TODO this
             return []
-        
+
         # 1 argument
         case "CALL_KW":
             #TODO this
             return []
-        
+
         # 1 argument
         case "CALL_FUNCTION_EX":
             #TODO this
             return []
-        
+
         case "PUSH_NULL":
             #TODO this
             return []
-        
+
         case "MAKE_FUNCTION":
             #TODO this
             return []
-        
+
         # 1 argument
         case "SET_FUNCTION_ATTRIBUTE":
             #TODO this
             return []
-        
+
         # 1 argument
         case "BUILD_SLICE":
             #TODO this
             return []
-        
+
         # 1 argument
         case "EXTENDED_ARG":
             #TODO this
             return []
-        
+
         # 1 argument
         case "CONVERT_VALUE":
             #TODO this
             return []
-        
+
         case "FORMAT_SIMPLE":
             #TODO this
             return []
-        
+
         case "FORMAT_WITH_SPEC":
             #TODO this
             return []
-        
+
         # 1 argument
         case "MATCH_CLASS":
             #TODO this
             return []
-        
+
         # 1 argument
         case "RESUME":
             return [0x90]
+
+        case "RETURN_GENERATOR":
+            #TODO this
+            return []
+
+        # 1 argument
+        case "SEND":
+            #TODO this
+            return []
+
+        case "HAVE_ARGUMENT":
+            #TODO this
+            return []
+
+        case "CALL_INTRINSIC_1":
+            #TODO this
+            return []
+
+        case "CALL_INTRINSIC_2":
+            #TODO this
+            return []
+
+        case "LOAD_SPECIAL":
+            #TODO this
+            return []
+
+
 
         case _:
             print(f"Unknown instruction {instruction.opname}")
