@@ -1,13 +1,15 @@
 from windowsFunctions import *
 
 import ctypes
-import inspect
 
 class CompiledFunction:
+	# break this out so we only have to go fetch types once
 	@staticmethod
 	def getCtypesTypes():
 		if "_allTypes" not in dir(CompiledFunction.getCtypesTypes):
+			import inspect
 			CompiledFunction.getCtypesTypes._allTypes = tuple(x[1] for x in inspect.getmembers(ctypes, inspect.isclass))
+			del inspect
 
 		return CompiledFunction.getCtypesTypes._allTypes
 
